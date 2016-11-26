@@ -14,5 +14,16 @@
         100 => Some other mode you write
         ...
         111 => 7th mode you write
-    You'll need one more port of you want to contorl more than 7 modes on the arduino 5. Install pi-gpio (https://github.com/rakeshpai/pi-gpio)
+    You'll need one more port of you want to control more than 7 modes on the arduino 5. Install pi-gpio (https://github.com/rakeshpai/pi-gpio)
     npm install pi-gpio
+5. To run the server:
+    # cd WaveTankSoftware/webserver/
+    # nodejs server.js
+
+    Commands above will run a web server on http://127.0.0.1:8124/index.html 
+    See code on WaveTankSoftware/webserver/public/index.html.
+    When you click a button javascript detects the click and relays a message
+    to the webserver using sockets where the webserver reads the message 
+    and actives the GPIO pins using the pi-gpio library.
+
+    Please see link above for more on pi-gpio.

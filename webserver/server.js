@@ -26,9 +26,84 @@ io.sockets.on("connection", function(socket) {
     socket.on("message", function(data) {
         /*This event is triggered at the server side when client sends the data using socket.send() method */
         data = JSON.parse(data);
+        console.log(data.mode)
+        /* Leave these if's commented until you are running
+         * this file on a board with gpio pins
+         *
 
-        /*Print the data */
-        console.log(data);
+        if (data.mode == 'reset') {
+            // 000 => do nothing for a bit
+            gpio.open(11, "output", function(err) {     // Open pin 16 for output
+                gpio.write(11, 0, function() {          // Set pin 16 high (1)
+                    gpio.close(11);                     // Close pin 16
+                });
+            });
+            gpio.open(12, "output", function(err) {
+                gpio.write(12, 0, function() {
+                    gpio.close(12);
+                });
+            });
+            gpio.open(13, "output", function(err) {
+                gpio.write(13, 0, function() {
+                    gpio.close(13);
+                });
+            });
+
+            // 001 => Start Position Mode, aka reset paddle
+            gpio.open(11, "output", function(err) {
+                gpio.write(11, 0, function() {
+                    gpio.close(11);
+                });
+            });
+            gpio.open(12, "output", function(err) {
+                gpio.write(12, 0, function() {
+                    gpio.close(12);
+                });
+            });
+            gpio.open(13, "output", function(err) {
+                gpio.write(13, 1, function() {
+                    gpio.close(13);
+                });
+            });
+        }
+        else if (data.mode == 'single') {
+            // 000 => do nothing for a bit
+            gpio.open(11, "output", function(err) {     // Open pin 16 for output
+                gpio.write(11, 0, function() {          // Set pin 16 high (1)
+                    gpio.close(11);                     // Close pin 16
+                });
+            });
+            gpio.open(12, "output", function(err) {
+                gpio.write(12, 0, function() {
+                    gpio.close(12);
+                });
+            });
+            gpio.open(13, "output", function(err) {
+                gpio.write(13, 0, function() {
+                    gpio.close(13);
+                });
+            });
+
+            // 010 => Start Single Wave Pulse mode 
+            gpio.open(11, "output", function(err) {
+                gpio.write(11, 0, function() {
+                    gpio.close(11);
+                });
+            });
+            gpio.open(12, "output", function(err) {
+                gpio.write(12, 1, function() {
+                    gpio.close(12);
+                });
+            });
+            gpio.open(13, "output", function(err) {
+                gpio.write(13, 0, function() {
+                    gpio.close(13);
+                });
+            });
+        }  
+        // else if(data.mode == 'somethingelse') {
+        // }
+        */
 
         var ack_to_client = {
             data:"Server Received the message"
